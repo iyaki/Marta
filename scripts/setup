@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+SCRIPTPATH=$(dirname "$(realpath "$0")")
+
+cd "${SCRIPTPATH}/../" || exit
+
+composer install
+composer mezzio completion bash > /usr/share/bash-completion/completions/mezzio
+composer clear-config-cache
+composer development-enable
+lefthook install

@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+SCRIPTPATH=$(dirname "$(realpath "$0")")
+
+cd "${SCRIPTPATH}/../" || exit
+
+composer install
+composer run serve
