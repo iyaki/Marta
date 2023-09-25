@@ -7,7 +7,7 @@ services:
     volumes:
       - ..:/workspaces/Marta:cached
       - ./xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
-      - ./99-overrides.ini:/usr/local/etc/php/conf.d/xdebug.ini
+      - ./99-overrides.ini:/usr/local/etc/php/conf.d/99-overrides.ini
 
     # Overrides default command so things don't shut down after the process ends.
     command: sleep infinity
