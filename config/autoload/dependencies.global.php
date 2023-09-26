@@ -2,6 +2,9 @@
 
 declare(strict_types=1);
 
+use App\Common\Persistence\Adapters\EntityManagerDoctrineFactory;
+use Doctrine\ORM\EntityManagerInterface;
+
 return [
     // Provides application-wide services.
     // We recommend using fully-qualified class names whenever possible as
@@ -20,7 +23,7 @@ return [
         ],
         // Use 'factories' for services provided by callbacks/factory classes.
         'factories' => [
-            // Fully\Qualified\ClassName::class => Fully\Qualified\FactoryName::class,
+            EntityManagerInterface::class => EntityManagerDoctrineFactory::class,
         ],
     ],
 ];
