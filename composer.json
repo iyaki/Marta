@@ -41,11 +41,11 @@
         "symfony/cache": "^6.3"
     },
     "require-dev": {
+        "filp/whoops": "^2.7.1",
         "laminas/laminas-development-mode": "^3.3.0",
-        "phpunit/phpunit": "^9.5.11",
         "mezzio/mezzio-tooling": "^2.8",
-        "roave/security-advisories": "dev-master",
-        "filp/whoops": "^2.7.1"
+        "phpunit/phpunit": "^9.5.11",
+        "roave/security-advisories": "dev-master"
     },
     "autoload": {
         "psr-4": {
