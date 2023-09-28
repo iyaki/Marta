@@ -44,6 +44,8 @@ return function (Application $app, MiddlewareFactory $factory, ContainerInterfac
     // - $app->pipe('/docs', $apiDocMiddleware);
     // - $app->pipe('/files', $filesMiddleware);
 
+    $app->pipe(BodyParamsMiddleware::class);
+
     // Register the routing middleware in the middleware pipeline.
     // This middleware registers the Mezzio\Router\RouteResult request attribute.
     $app->pipe(RouteMiddleware::class);
@@ -60,8 +62,6 @@ return function (Application $app, MiddlewareFactory $factory, ContainerInterfac
 
     // Seed the UrlHelper with the routing results:
     $app->pipe(UrlHelperMiddleware::class);
-
-    $app->pipe(BodyParamsMiddleware::class);
 
     // Add more middleware here that needs to introspect the routing results; this
     // might include:
