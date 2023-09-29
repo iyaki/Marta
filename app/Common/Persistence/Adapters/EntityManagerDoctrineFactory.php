@@ -13,18 +13,18 @@ final class EntityManagerDoctrineFactory
 {
     public function __invoke(ContainerInterface $container): EntityManager
     {
-        $paths = [
-        ];
+        $configData = $container->get('config');
+        $configDoctrine = $configData['doctrine'];
 
         $config = ORMSetup::createAttributeMetadataConfiguration(
-            paths: $paths,
-            isDevMode: $container->get('config')['debug'] ?? false,
+            paths: $configDoctrine['entitiesPaths'] ?? [],
+            isDevMode: $configData['debug'] ?? false,
             reportFieldsWhereDeclared: true
         );
+        $config->setDefaultRepositoryClassName(EntityRepositoryDoctrine::class);
 
         /** @psalm-var array{driver: string, host: sring, user: string, password: string, dbname: string}|null */
-        $params = $container->get('config')['doctrine']['connection']['params'] ?? null;
-        ;
+        $params = $configDoctrine['connection']['params'] ?? null;
 
         \assert($params !== null);
 
