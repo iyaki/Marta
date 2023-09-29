@@ -2,9 +2,13 @@
 
 declare(strict_types=1);
 
+use App\Cuentas\Controllers\GetCuentasCollectionHandler;
+use App\Cuentas\Controllers\GetCuentasNuevoHandler;
+use App\Cuentas\Controllers\GetCuentasResourceHandler;
 use Mezzio\Application;
 use Mezzio\MiddlewareFactory;
 use Psr\Container\ContainerInterface;
+use App\Cuentas\WebApp\GetCuentasViewHandler;
 
 /**
  * FastRoute route configuration
@@ -38,6 +42,7 @@ use Psr\Container\ContainerInterface;
  */
 
 return static function (Application $app, MiddlewareFactory $factory, ContainerInterface $container): void {
-    $app->get('/', App\Handler\HomePageHandler::class, 'home');
-    $app->get('/api/ping', App\Handler\PingHandler::class, 'api.ping');
+    $app->get('/cuentas', GetCuentasCollectionHandler::class, 'cuentas.collection');
+    $app->get('/cuentas/{id:\d+}', GetCuentasResourceHandler::class, 'cuentas.resource');
+    $app->get('/cuentas/nuevo', GetCuentasNuevoHandler::class, 'cuentas.nuevo');
 };
