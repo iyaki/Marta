@@ -12,5 +12,8 @@ return [
                 'dbname'   => '',
             ],
         ],
+        'entitiesPaths' => [
+            __DIR__ . '/../../app/Cuentas',
+        ]
     ],
 ];
