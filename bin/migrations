@@ -1,0 +1,26 @@
+#!/usr/bin/env php
+<?php
+
+declare(strict_types=1);
+
+use Doctrine\DBAL\DriverManager;
+use Doctrine\Migrations\Configuration\Connection\ExistingConnection;
+use Doctrine\Migrations\Configuration\EntityManager\ExistingEntityManager;
+use Doctrine\Migrations\Configuration\Migration\ConfigurationArray;
+use Doctrine\Migrations\Configuration\Migration\PhpFile;
+use Doctrine\Migrations\DependencyFactory;
+use Doctrine\Migrations\Tools\Console\ConsoleRunner;
+use Doctrine\ORM\EntityManagerInterface;
+
+require __DIR__ . '/../vendor/autoload.php';
+$container = require __DIR__ . '/../config/container.php';
+
+$config = new ConfigurationArray($container->get('config')['doctrine']['migrations']);
+
+ConsoleRunner::run(
+    [],
+    DependencyFactory::fromEntityManager(
+        $config,
+        new ExistingEntityManager($container->get(EntityManagerInterface::class))
+    )
+);
