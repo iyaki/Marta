@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace App\Common\Persistence;
 use Doctrine\Common\Collections\Criteria;
+use Doctrine\Common\Collections\Selectable;
 
 /**
- * @template T of object
- * @psalm-template TKey as array-key
+ * @template-covaraint T of object
  */
-interface EntityRepository
+interface EntityRepository extends Selectable
 {
     /**
      * @psalm-return list<T>.
@@ -32,7 +32,7 @@ interface EntityRepository
      * @return \Doctrine\Common\Collections\ReadableCollection<mixed>&\Doctrine\Common\Collections\Selectable<mixed>
      * @psalm-return \Doctrine\Common\Collections\ReadableCollection<TKey,T>&\Doctrine\Common\Collections\Selectable<TKey,T>
      */
-    public function matching(Criteria $criteria);
+    // public function matching(Criteria $criteria);
 
     /**
      * @psalm-param T
