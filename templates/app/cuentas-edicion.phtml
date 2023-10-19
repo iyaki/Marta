@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<title>Editar Cuenta | Marta</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Sistema de gestión de finanzas hogareñas compartidas">
+
+	<!-- <link href="style.css" rel="stylesheet"> -->
+	<!-- <link rel="icon" type="image/svg+xml" href="/favicon.svg"> -->
+</head>
+<body>
+	<nav>
+		<ul>
+			<li><a href="<?= $urlHelper->generate('cuentas.indice') ?>">Cuentas</a></li>
+		</ul>
+	</nav>
+	<header>
+		<h1>Editar cuenta</h1>
+	</header>
+	<main>
+		<form method="POST" action="<?= $urlHelper->generate('cuentas.actualizar', ['id' => $cuenta->id()]) ?>">
+			<label>
+				Nombre (*)
+				<input type="text" autocomplete="off" name="nombre" required value="<?= $this->e($cuenta->nombre()) ?>">
+			</label>
+			<label>
+				Titulares
+				<select multiple name="titulares">
+					<option>1</option>
+					<option>2</option>
+				</select>
+			</label>
+			<input type="submit">
+		</form>
+		<form>
+			<button type="submit">Eliminar</button>
+		</form>
+	</main>
+	<!-- <script src="script.js"></script> -->
+</body>
+</html>

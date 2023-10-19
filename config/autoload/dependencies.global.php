@@ -3,6 +3,8 @@
 declare(strict_types=1);
 
 use App\Common\Persistence\Adapters\EntityManagerDoctrineFactory;
+use App\Common\Persistence\Adapters\EntityRepositoryDoctrineFactory;
+use App\Common\Persistence\EntityRepository;
 use Doctrine\ORM\EntityManagerInterface;
 
 return [
@@ -24,6 +26,7 @@ return [
         // Use 'factories' for services provided by callbacks/factory classes.
         'factories' => [
             EntityManagerInterface::class => EntityManagerDoctrineFactory::class,
+            EntityRepository::class . '*' => EntityRepositoryDoctrineFactory::class,
         ],
     ],
 ];

@@ -10,25 +10,35 @@ use DI\Attribute\Inject;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Tools\Console\ConsoleRunner;
 use Doctrine\ORM\Tools\Console\EntityManagerProvider\SingleManagerProvider;
-use Framework\DependencyInjectionContainer\EntityRepositoryHelper;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Laminas\Diactoros\Response\HtmlResponse;
+use Mezzio\Helper\UrlHelperInterface;
 use Mezzio\Template\TemplateRendererInterface;
 
-class GetCuentasCollectionHandler implements RequestHandlerInterface
+class CuentasEdicionHandler implements RequestHandlerInterface
 {
+    /**
+     * @param EntityRepository<Cuenta> $repository
+     */
     public function __construct(
-        private TemplateRendererInterface $renderer
+        private readonly TemplateRendererInterface $renderer,
+        private readonly UrlHelperInterface $urlHelper,
+        #[Inject(EntityRepository::class . Cuenta::class)]
+        private readonly EntityRepository $repository
     ) {
     }
 
     public function handle(ServerRequestInterface $request) : ResponseInterface
     {
         return new HtmlResponse($this->renderer->render(
-            'app::cuentas-collection',
-            [] // parameters to pass to template
+            'app::cuentas-edicion',
+            [
+                'urlHelper' => $this->urlHelper,
+                'cuenta' => $this->repository->find($request->getAttribute('id'))
+            ] // parameters to pass to template
         ));
     }
+
 }

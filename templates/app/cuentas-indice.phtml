@@ -5,8 +5,6 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="Sistema de gestión de finanzas hogareñas compartidas">
-	<base href="/cuentas/">
-
 	<!-- <link href="style.css" rel="stylesheet"> -->
 	<!-- <link rel="icon" type="image/svg+xml" href="/favicon.svg"> -->
 </head>
@@ -24,12 +22,15 @@
 			<form>
 				<label>
 					Búsqueda
-					<input type="search" autocomplete="on" autofocus name="q">
+					<input type="search" autocomplete="on" autofocus name="q" value="<?= $query ?: '' ?>">
 				</label>
 				<input type="submit">
 			</form>
+			<form>
+				<button type="submit">Restablecer</button>
+			</form>
 		</search>
-		<a href="nuevo">Crear cuenta</a>
+		<a href="<?= $urlHelper->generate('cuentas.nuevo') ?>">Crear cuenta</a>
 		<table>
 			<caption>
 				<h2>Cuentas</h2>
@@ -42,11 +43,15 @@
 				</tr>
 			</thead>
 			<tbody>
+				<?php foreach ($cuentas as $cuenta): ?>
 				<tr>
+					<td><?= $this->e($cuenta->nombre()) ?></td>
 					<td></td>
-					<td></td>
-					<td></td>
+					<td>
+						<a href="<?= $urlHelper->generate('cuentas.edicion', ['id' => $cuenta->id()]) ?>">Editar</a>
+					</td>
 				</tr>
+				<?php endforeach ?>
 			</tbody>
 		</table>
 	</main>

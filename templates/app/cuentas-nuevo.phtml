@@ -12,17 +12,17 @@
 <body>
 	<nav>
 		<ul>
-			<li><a href="/cuentas">Cuentas</a></li>
+			<li><a href="<?= $urlHelper->generate('cuentas.indice') ?>">Cuentas</a></li>
 		</ul>
 	</nav>
 	<header>
 		<h1>Crear cuenta</h1>
 	</header>
 	<main>
-		<form>
+		<form method="POST" action="<?= $urlHelper->generate('cuentas.crear') ?>">
 			<label>
-				Nombre
-				<input type="text" autocomplete="off" autofocus name="nombre">
+				Nombre (*)
+				<input type="text" autocomplete="off" autofocus name="nombre" required>
 			</label>
 			<label>
 				Titulares
