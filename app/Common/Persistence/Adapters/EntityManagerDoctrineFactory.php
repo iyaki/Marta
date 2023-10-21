@@ -9,21 +9,31 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\ORMSetup;
 use Psr\Container\ContainerInterface;
 
+/**
+ * @psalm-import-type Params from DriverManager
+ */
 final class EntityManagerDoctrineFactory
 {
     public function __invoke(ContainerInterface $container): EntityManager
     {
+        /**
+         * @psalm-var array{
+         *  debug?: bool,
+         *  doctrine?: array{
+         *      entitiesPaths?: array<array-key, string>,
+         *      connection?: array{params?: Params}
+         *  }
+         * } */
         $configData = $container->get('config');
-        $configDoctrine = $configData['doctrine'];
+        $configDoctrine = $configData['doctrine'] ?? [];
 
         $config = ORMSetup::createAttributeMetadataConfiguration(
             paths: $configDoctrine['entitiesPaths'] ?? [],
             isDevMode: $configData['debug'] ?? false,
             reportFieldsWhereDeclared: true
         );
-        $config->setDefaultRepositoryClassName(EntityRepositoryDoctrine::class);
+        // $config->setDefaultRepositoryClassName(EntityRepositoryDoctrine::class);
 
-        /** @psalm-var array{driver: string, host: sring, user: string, password: string, dbname: string}|null */
         $params = $configDoctrine['connection']['params'] ?? null;
 
         \assert($params !== null);

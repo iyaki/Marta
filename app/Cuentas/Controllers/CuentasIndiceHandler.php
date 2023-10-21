@@ -6,6 +6,7 @@ namespace App\Cuentas\Controllers;
 
 use App\Common\Persistence\EntityRepository;
 use App\Cuentas\Cuenta;
+use App\Cuentas\Requests\BasicSearchQuery;
 use DI\Attribute\Inject;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\EntityManagerInterface;
@@ -35,21 +36,21 @@ class CuentasIndiceHandler implements RequestHandlerInterface
 
     public function handle(ServerRequestInterface $request) : ResponseInterface
     {
-        $query = $request->getQueryParams()['q'] ?? null;
+        $query = BasicSearchQuery::fromRequest($request);
 
-        $cuentas = (
-            $query === null
-            ? $this->repository->findAll()
-            : $this->repository->matching(
-                new Criteria(Criteria::expr()->contains('nombre', $query))
-            )
-        );
+        if ($query->query === null) {
+            $cuentas = $this->repository->all();
+        } else {
+            $cuentas = $this->repository->matching(
+                new Criteria(Criteria::expr()->contains('nombre', $query->query))
+            );
+        }
 
         return new HtmlResponse($this->renderer->render(
             'app::cuentas-indice',
             [
                 'urlHelper' => $this->urlHelper,
-                'query' => $query,
+                'query' => $query->query,
                 'cuentas' => $cuentas,
             ] // parameters to pass to template
         ));

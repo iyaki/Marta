@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping\Id;
 class Cuenta
 {
     #[Column, Id, GeneratedValue]
-    private ?int $id;
+    private ?int $id = null;
 
     public function __construct(
         #[Column]

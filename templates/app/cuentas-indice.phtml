@@ -1,3 +1,28 @@
+<?php
+declare(strict_types=1);
+
+use App\Cuentas\Cuenta;
+use League\Plates\Template\Template;
+use Mezzio\Helper\UrlHelperInterface;
+
+\assert($this instanceof Template);
+
+/** @var ?string */
+$query ??= null;
+$query = (string) $query;
+
+/** @var ?UrlHelperInterface */
+$urlHelper ??= null;
+\assert($urlHelper instanceof UrlHelperInterface);
+
+/** @var Cuenta[] */
+$cuentas ??= [];
+// Verifico que $cuentas este compuesto por elementos de tipo Cuenta
+(fn(Cuenta ...$cuentas): array => $cuentas)(...$cuentas);
+
+echo $cuentas[0]->nombre();
+
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -22,7 +47,7 @@
 			<form>
 				<label>
 					Búsqueda
-					<input type="search" autocomplete="on" autofocus name="q" value="<?= $query ?: '' ?>">
+					<input type="search" autocomplete="on" autofocus name="q" value="<?= $query ?>">
 				</label>
 				<input type="submit">
 			</form>

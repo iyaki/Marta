@@ -16,14 +16,9 @@ use Mezzio\Template\TemplateRendererInterface;
 
 class CuentasNuevoHandler implements RequestHandlerInterface
 {
-    /**
-     * @param EntityRepository<Cuenta> $repository
-     */
     public function __construct(
         private readonly TemplateRendererInterface $renderer,
-        private readonly UrlHelperInterface $urlHelper,
-        #[Inject(EntityRepository::class . Cuenta::class)]
-        private readonly EntityRepository $repository
+        private readonly UrlHelperInterface $urlHelper
     ) {
     }
 

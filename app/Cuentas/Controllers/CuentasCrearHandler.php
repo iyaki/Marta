@@ -6,6 +6,7 @@ namespace App\Cuentas\Controllers;
 
 use App\Common\Persistence\EntityRepository;
 use App\Cuentas\Cuenta;
+use App\Cuentas\Requests\CuentaPayload;
 use DI\Attribute\Inject;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -30,20 +31,9 @@ class CuentasCrearHandler implements RequestHandlerInterface
 
     public function handle(ServerRequestInterface $request) : ResponseInterface
     {
-        $processor = new \Nette\Schema\Processor();
-        $schema = Expect::structure([
-            'nombre' => Expect::string()
-                ->min(3)
-                ->max(255)
-                ->required()
-        ]);
-        try {
-            $data = $processor->process($schema, $request->getParsedBody());
-        } catch (\Nette\Schema\ValidationException $e) {
-            return new HtmlResponse('Data is invalid: ' . $e->getMessage());
-        }
+        $payload = CuentaPayload::fromRequest($request);
 
-        $cuentaNueva = new Cuenta($data->nombre);
+        $cuentaNueva = new Cuenta($payload->nombre);
         $this->repository->add($cuentaNueva);
 
         return new RedirectResponse($this->urlHelper->generate('cuentas.indice'));

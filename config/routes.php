@@ -43,7 +43,7 @@ use App\Cuentas\WebApp\GetCuentasViewHandler;
  * );
  */
 
-return static function (Application $app, MiddlewareFactory $factory, ContainerInterface $container): void {
+return static function (Application $app, /* MiddlewareFactory $factory, ContainerInterface $container */): void {
     /**
      * Routes follow the RAILS standard for resources
      * https://guides.rubyonrails.org/routing.html#crud-verbs-and-actions

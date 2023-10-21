@@ -3,39 +3,40 @@
 declare(strict_types=1);
 
 namespace App\Common\Persistence;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Criteria;
+use Doctrine\Common\Collections\ReadableCollection;
 use Doctrine\Common\Collections\Selectable;
 
 /**
- * @template-covaraint T of object
+ * @template T of object
  */
-interface EntityRepository extends Selectable
+interface EntityRepository
 {
     /**
-     * @psalm-return list<T>.
+     * @return ArrayCollection<int<0, max>,T>
      */
-    public function findAll();
+    public function all(): ArrayCollection;
 
     /**
-     * @return object|null
-     * @psalm-return ?T
+     * @param int $id
+     * @return T|null
      */
-    public function find($id);
+    public function find(int $id): object|null;
 
     /**
-     * @psalm-return T
+     * @return T
      * @throws \UnexpectedValueException
      */
     public function get(int $id): object;
 
     /**
-     * @return \Doctrine\Common\Collections\ReadableCollection<mixed>&\Doctrine\Common\Collections\Selectable<mixed>
-     * @psalm-return \Doctrine\Common\Collections\ReadableCollection<TKey,T>&\Doctrine\Common\Collections\Selectable<TKey,T>
+     * @return ArrayCollection<int<0, max>, T>
      */
-    // public function matching(Criteria $criteria);
+    public function matching(Criteria $criteria): ArrayCollection;
 
     /**
-     * @psalm-param T
+     * @param T $entity
      */
     public function add(object $entity): void;
 }

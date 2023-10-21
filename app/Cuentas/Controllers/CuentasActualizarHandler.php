@@ -6,6 +6,7 @@ namespace App\Cuentas\Controllers;
 
 use App\Common\Persistence\EntityRepository;
 use App\Cuentas\Cuenta;
+use App\Cuentas\Requests\CuentaPayload;
 use DI\Attribute\Inject;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Tools\Console\ConsoleRunner;
@@ -27,29 +28,17 @@ class CuentasActualizarHandler implements RequestHandlerInterface
     public function __construct(
         private readonly UrlHelperInterface $urlHelper,
         #[Inject(EntityRepository::class . Cuenta::class)]
-        private readonly EntityRepository $repository,
-        private EntityManagerInterface $em
+        private readonly EntityRepository $repository
     ) {
     }
 
     public function handle(ServerRequestInterface $request) : ResponseInterface
     {
-        $processor = new \Nette\Schema\Processor();
-        $schema = Expect::structure([
-            'nombre' => Expect::string()
-                ->min(3)
-                ->max(255)
-                ->required()
-        ]);
-        try {
-            $data = $processor->process($schema, $request->getParsedBody());
-        } catch (\Nette\Schema\ValidationException $e) {
-            return new HtmlResponse('Data is invalid: ' . $e->getMessage());
-        }
+        $id = (int) $request->getAttribute('id');
+        $payload = CuentaPayload::fromRequest($request);
 
-        $cuentaId = (int) $request->getAttribute('id');
-        $cuenta = $this->repository->get($cuentaId);
-        $cuenta->setNombre($data->nombre);
+        $cuenta = $this->repository->get($id);
+        $cuenta->setNombre($payload->nombre);
         $this->repository->add($cuenta);
 
         return new RedirectResponse($this->urlHelper->generate('cuentas.indice'));

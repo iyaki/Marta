@@ -17,11 +17,16 @@ final class EntityRepositoryDoctrineFactory
         $matches = [];
         \preg_match($this->entryRegex(), $entry->getName(), $matches);
 
-        $entity = $matches[1] ?? null;
+        $entity = $matches[1] ?? '';
 
-        return $em->getRepository($entity);
+        \assert(class_exists($entity));
+
+        return new EntityRepositoryDoctrine($em, $entity);
     }
 
+    /**
+     * @psalm-return non-empty-string
+     */
     private function entryRegex(): string
     {
         $repo = \str_replace('\\', '\\\\', EntityRepository::class);

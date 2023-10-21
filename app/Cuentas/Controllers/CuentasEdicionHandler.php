@@ -36,7 +36,7 @@ class CuentasEdicionHandler implements RequestHandlerInterface
             'app::cuentas-edicion',
             [
                 'urlHelper' => $this->urlHelper,
-                'cuenta' => $this->repository->find($request->getAttribute('id'))
+                'cuenta' => $this->repository->find((int) $request->getAttribute('id'))
             ] // parameters to pass to template
         ));
     }
