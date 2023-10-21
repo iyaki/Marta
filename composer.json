@@ -24,6 +24,8 @@
     },
     "require": {
         "php": "~8.2.0",
+        "ext-mysqli": "*",
+        "ext-pdo_mysql": "*",
         "composer/package-versions-deprecated": "^1.11.99.5",
         "doctrine/collections": "^2.1.4",
         "doctrine/dbal": "^3.7.1",
