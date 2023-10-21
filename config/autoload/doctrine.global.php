@@ -24,7 +24,7 @@ return [
                 'execution_time_column_name' => 'execution_time',
             ],
             'migrations_paths' => [
-                'App\Migrations' => __DIR__ . '/../../database/migrations',
+                'Marta\Migrations' => __DIR__ . '/../../database/migrations',
             ],
             'all_or_nothing' => true,
             'transactional' => true,

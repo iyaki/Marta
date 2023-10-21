@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Common\Persistence\Adapters;
+namespace Marta\Common\Persistence\Adapters;
 
-use App\Common\Persistence\EntityRepository;
+use Marta\Common\Persistence\EntityRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\Common\Collections\ReadableCollection;

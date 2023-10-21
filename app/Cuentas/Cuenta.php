@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Cuentas;
+namespace Marta\Cuentas;
 
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;

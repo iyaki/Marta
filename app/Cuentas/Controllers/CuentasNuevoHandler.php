@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Cuentas\Controllers;
+namespace Marta\Cuentas\Controllers;
 
-use App\Common\Persistence\EntityRepository;
-use App\Cuentas\Cuenta;
+use Marta\Common\Persistence\EntityRepository;
+use Marta\Cuentas\Cuenta;
 use DI\Attribute\Inject;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;

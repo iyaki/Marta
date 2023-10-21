@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Common\Persistence\Adapters;
+namespace Marta\Common\Persistence\Adapters;
 
 use Doctrine\DBAL\DriverManager;
 use Doctrine\ORM\EntityManager;
