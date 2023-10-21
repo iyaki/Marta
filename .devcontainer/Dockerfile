@@ -16,6 +16,8 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
 		bash-completion \
 		lefthook \
 		mariadb-client \
+		libzip-dev \
+		zip \
 	&& apt-get clean -y && rm -rf /var/lib/apt/lists/* \
 	&& composer completion bash > /usr/share/bash-completion/completions/composer \
 	&& lefthook completion bash > /usr/share/bash-completion/completions/lefthook \
@@ -26,7 +28,8 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
 RUN docker-php-ext-install \
 	mysqli \
 	pdo \
-	pdo_mysql
+	pdo_mysql \
+	zip
 
 # Path para ejecutar binarios por proyecto
 ENV PATH="./vendor/bin:${PATH}"
