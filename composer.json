@@ -49,7 +49,6 @@
 	"autoload": {
 		"psr-4": {
 			"Marta\\": "app/",
-			"Framework\\": "framework/"
 		}
 	},
 	"autoload-dev": {

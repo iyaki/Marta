@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Marta\Cuentas\Controllers;
+namespace Marta\Presentation\Cuentas\Controllers;
 
-use Marta\Common\Persistence\EntityRepository;
-use Marta\Cuentas\Cuenta;
-use Marta\Cuentas\Requests\CuentaPayload;
+use Marta\Domain\Shared\EntityRepository;
+use Marta\Domain\Cuentas\Cuenta;
+use Marta\Presentation\Cuentas\Requests\CuentaPayload;
 use DI\Attribute\Inject;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;

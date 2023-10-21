@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Marta\Cuentas\Controllers;
+namespace Marta\Presentation\Cuentas\Controllers;
 
-use Marta\Common\Persistence\EntityRepository;
-use Marta\Cuentas\Cuenta;
-use Marta\Cuentas\Requests\BasicSearchQuery;
+use Marta\Domain\Shared\EntityRepository;
+use Marta\Domain\Cuentas\Cuenta;
+use Marta\Presentation\Common\Requests\BasicSearchQuery;
 use DI\Attribute\Inject;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\EntityManagerInterface;

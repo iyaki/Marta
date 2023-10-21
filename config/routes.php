@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-use Marta\Cuentas\Controllers\CuentasCrearHandler;
-use Marta\Cuentas\Controllers\CuentasIndiceHandler;
-use Marta\Cuentas\Controllers\CuentasNuevoHandler;
-use Marta\Cuentas\Controllers\CuentasActualizarHandler;
-use Marta\Cuentas\Controllers\CuentasEdicionHandler;
+use Marta\Presentation\Cuentas\Controllers\CuentasCrearHandler;
+use Marta\Presentation\Cuentas\Controllers\CuentasIndiceHandler;
+use Marta\Presentation\Cuentas\Controllers\CuentasNuevoHandler;
+use Marta\Presentation\Cuentas\Controllers\CuentasActualizarHandler;
+use Marta\Presentation\Cuentas\Controllers\CuentasEdicionHandler;
 use Mezzio\Application;
 use Mezzio\MiddlewareFactory;
 use Psr\Container\ContainerInterface;

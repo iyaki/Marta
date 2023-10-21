@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Marta\Common\Persistence\Adapters;
+namespace Marta\Infra\Shared;
 
-use Marta\Common\Persistence\EntityRepository;
+use Marta\Domain\Shared\EntityRepository;
 use DI\Factory\RequestedEntry;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;

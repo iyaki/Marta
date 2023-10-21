@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Marta\Cuentas\Requests;
+namespace Marta\Presentation\Cuentas\Requests;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ServerRequestInterface;
 

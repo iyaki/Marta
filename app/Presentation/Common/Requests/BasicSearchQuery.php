@@ -2,7 +2,8 @@
 
 declare(strict_types=1);
 
-namespace Marta\Cuentas\Requests;
+namespace Marta\Presentation\Common\Requests;
+
 use Psr\Http\Message\ServerRequestInterface;
 
 final readonly class BasicSearchQuery

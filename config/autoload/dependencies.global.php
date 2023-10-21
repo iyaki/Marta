@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-use Marta\Common\Persistence\Adapters\EntityManagerDoctrineFactory;
-use Marta\Common\Persistence\Adapters\EntityRepositoryDoctrineFactory;
-use Marta\Common\Persistence\EntityRepository;
+use Marta\Infra\Shared\EntityManagerDoctrineFactory;
+use Marta\Infra\Shared\EntityRepositoryDoctrineFactory;
+use Marta\Domain\Shared\EntityRepository;
 use Doctrine\ORM\EntityManagerInterface;
 
 return [
