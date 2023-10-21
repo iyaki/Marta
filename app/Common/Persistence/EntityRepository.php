@@ -19,7 +19,6 @@ interface EntityRepository
     public function all(): ArrayCollection;
 
     /**
-     * @param int $id
      * @return T|null
      */
     public function find(int $id): object|null;

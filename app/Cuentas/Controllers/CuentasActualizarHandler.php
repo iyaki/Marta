@@ -20,15 +20,14 @@ use Mezzio\Helper\UrlHelperInterface;
 use Mezzio\Template\TemplateRendererInterface;
 use Nette\Schema\Expect;
 
-class CuentasActualizarHandler implements RequestHandlerInterface
+final readonly class CuentasActualizarHandler implements RequestHandlerInterface
 {
     /**
      * @psalm-param EntityRepository<Cuenta> $repository
      */
     public function __construct(
-        private readonly UrlHelperInterface $urlHelper,
-        #[Inject(EntityRepository::class . Cuenta::class)]
-        private readonly EntityRepository $repository
+        private UrlHelperInterface $urlHelper,
+        #[Inject(EntityRepository::class . Cuenta::class)]private EntityRepository $repository
     ) {
     }
 

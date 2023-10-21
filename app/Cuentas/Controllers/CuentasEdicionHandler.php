@@ -17,16 +17,15 @@ use Laminas\Diactoros\Response\HtmlResponse;
 use Mezzio\Helper\UrlHelperInterface;
 use Mezzio\Template\TemplateRendererInterface;
 
-class CuentasEdicionHandler implements RequestHandlerInterface
+final readonly class CuentasEdicionHandler implements RequestHandlerInterface
 {
     /**
      * @param EntityRepository<Cuenta> $repository
      */
     public function __construct(
-        private readonly TemplateRendererInterface $renderer,
-        private readonly UrlHelperInterface $urlHelper,
-        #[Inject(EntityRepository::class . Cuenta::class)]
-        private readonly EntityRepository $repository
+        private TemplateRendererInterface $renderer,
+        private UrlHelperInterface $urlHelper,
+        #[Inject(EntityRepository::class . Cuenta::class)]private EntityRepository $repository
     ) {
     }
 

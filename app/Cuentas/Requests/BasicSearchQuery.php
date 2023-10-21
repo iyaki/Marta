@@ -5,23 +5,23 @@ declare(strict_types=1);
 namespace App\Cuentas\Requests;
 use Psr\Http\Message\ServerRequestInterface;
 
-final class BasicSearchQuery
+final readonly class BasicSearchQuery
 {
     private function __construct(
-        public readonly ?string $query
+        public ?string $query
     )
     {}
 
     static public function fromRequest(ServerRequestInterface $request): static
     {
         $queryParams = (object) \json_decode(
-            json: \json_encode($request->getQueryParams()),
+            json: \json_encode($request->getQueryParams(), JSON_THROW_ON_ERROR),
             flags: JSON_THROW_ON_ERROR
         );
 
         $query = \property_exists($queryParams, 'q') ? trim((string) $queryParams->q) : null;
 
-        return new static($query);
+        return new self($query);
 
     }
 

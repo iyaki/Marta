@@ -17,19 +17,19 @@ use Doctrine\ORM\EntityRepository as ORMEntityRepository;
  * @psalm-template T of object
  * @implements EntityRepository<T>
  */
-final class EntityRepositoryDoctrine implements EntityRepository
+final readonly class EntityRepositoryDoctrine implements EntityRepository
 {
     /**
      * @var ORMEntityRepository<T>
      */
-    private readonly ORMEntityRepository $repo;
+    private ORMEntityRepository $repo;
 
     /**
      * @psalm-param class-string<T> $entityName
      */
     public function __construct(
-        private readonly EntityManagerInterface $em,
-        private readonly string $entityName
+        private EntityManagerInterface $em,
+        private string $entityName
     ) {
         $this->repo = $em->getRepository($entityName);
     }

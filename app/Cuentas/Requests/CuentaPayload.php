@@ -6,17 +6,17 @@ namespace App\Cuentas\Requests;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
-final class CuentaPayload
+final readonly class CuentaPayload
 {
     private function __construct(
-        public readonly string $nombre
+        public string $nombre
     )
     {}
 
     static public function fromRequest(ServerRequestInterface $request): static
     {
         $body = (object) \json_decode(
-            json: \json_encode($request->getParsedBody()),
+            json: \json_encode($request->getParsedBody(), JSON_THROW_ON_ERROR),
             flags: JSON_THROW_ON_ERROR
         );
 
@@ -26,7 +26,7 @@ final class CuentaPayload
         $nombre = trim($nombre);
         \assert($nombre !== '');
 
-        return new static(
+        return new self(
             $nombre
         );
     }

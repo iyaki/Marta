@@ -14,11 +14,11 @@ use Laminas\Diactoros\Response\HtmlResponse;
 use Mezzio\Helper\UrlHelperInterface;
 use Mezzio\Template\TemplateRendererInterface;
 
-class CuentasNuevoHandler implements RequestHandlerInterface
+final readonly class CuentasNuevoHandler implements RequestHandlerInterface
 {
     public function __construct(
-        private readonly TemplateRendererInterface $renderer,
-        private readonly UrlHelperInterface $urlHelper
+        private TemplateRendererInterface $renderer,
+        private UrlHelperInterface $urlHelper
     ) {
     }
 

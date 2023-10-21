@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 return [
     'templates'  => [
-        'extension' => 'php',
         'paths' => [
-            'app'    => ['templates/app'],
-            'error'  => ['templates/error'],
-            'layout' => ['templates/layout'],
+            'app'    => [__DIR__ . '/../../templates/app'],
+            'error'  => [__DIR__ . '/../../templates/error'],
+            'layout' => [__DIR__ . '/../../templates/layout'],
         ],
     ],
 ];
