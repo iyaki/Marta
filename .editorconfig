@@ -9,12 +9,16 @@ insert_final_newline = true
 trim_trailing_whitespace = true
 trim_trailing_whitespace = true
 
-[*.{phtml,js,html,css}]
+[Dockerfile]
+indent_style = tab
+
+[*.{phtml,js,html,css,json,xml,lock}*]
 indent_style = tab
 indent_size = 2
 
-[*.{yml,yaml}]
+[*.{yml,yaml}*]
 indent_style = space
+indent_size = 2
 
 [*.md]
 trim_trailing_whitespace = false
