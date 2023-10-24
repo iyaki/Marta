@@ -15,10 +15,7 @@
 		<directory name="bin"/>
 		<directory name="config"/>
 		<directory name="database"/>
-		<directory name="framework"/>
 		<directory name="public"/>
-		<directory name="templates"/>
-		<directory name="test"/>
 		<ignoreFiles>
 			<directory name="vendor"/>
 		</ignoreFiles>
@@ -39,13 +36,13 @@
 	<issueHandlers>
 		<PossiblyUnusedMethod>
 			<errorLevel type="suppress">
-				<directory name="app/*/Controllers"/>
+				<directory name="app/*/*/Controllers"/>
 				<referencedMethod name="@__construct@"/>
 			</errorLevel>
 		</PossiblyUnusedMethod>
 		<InvalidScope>
 			<errorLevel type="suppress">
-				<directory name="templates"/>
+				<directory name="**/templates"/>
 			</errorLevel>
 		</InvalidScope>
 		<UnusedClass>
