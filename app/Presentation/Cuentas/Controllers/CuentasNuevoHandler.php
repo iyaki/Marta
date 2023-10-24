@@ -11,22 +11,19 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Laminas\Diactoros\Response\HtmlResponse;
+use Marta\Presentation\Common\Responses\ResponseFactory;
 use Mezzio\Helper\UrlHelperInterface;
 use Mezzio\Template\TemplateRendererInterface;
 
 final readonly class CuentasNuevoHandler implements RequestHandlerInterface
 {
     public function __construct(
-        private TemplateRendererInterface $renderer,
-        private UrlHelperInterface $urlHelper
+        private ResponseFactory $responseFactory
     ) {
     }
 
     public function handle(ServerRequestInterface $request) : ResponseInterface
     {
-        return new HtmlResponse($this->renderer->render(
-            'app::cuentas-nuevo',
-            ['urlHelper' => $this->urlHelper] // parameters to pass to template
-        ));
+        return $this->responseFactory->createTemplatedHtmlResponse('cuentas::pages/nuevo');
     }
 }

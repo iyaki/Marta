@@ -14,6 +14,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Laminas\Diactoros\Response\HtmlResponse;
+use Marta\Presentation\Common\Responses\ResponseFactory;
 use Mezzio\Helper\UrlHelperInterface;
 use Mezzio\Template\TemplateRendererInterface;
 
@@ -23,21 +24,17 @@ final readonly class CuentasEdicionHandler implements RequestHandlerInterface
      * @param EntityRepository<Cuenta> $repository
      */
     public function __construct(
-        private TemplateRendererInterface $renderer,
-        private UrlHelperInterface $urlHelper,
-        #[Inject(EntityRepository::class . Cuenta::class)]private EntityRepository $repository
+        #[Inject(EntityRepository::class . Cuenta::class)]private EntityRepository $repository,
+        private ResponseFactory $responseFactory
     ) {
     }
 
     public function handle(ServerRequestInterface $request) : ResponseInterface
     {
-        return new HtmlResponse($this->renderer->render(
-            'app::cuentas-edicion',
-            [
-                'urlHelper' => $this->urlHelper,
-                'cuenta' => $this->repository->find((int) $request->getAttribute('id'))
-            ] // parameters to pass to template
-        ));
+        return $this->responseFactory->createTemplatedHtmlResponse(
+            'cuentas::pages/edicion',
+            ['cuenta' => $this->repository->find((int) $request->getAttribute('id'))]
+        );
     }
 
 }

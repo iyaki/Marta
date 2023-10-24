@@ -18,6 +18,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Laminas\Diactoros\Response\HtmlResponse;
+use Marta\Presentation\Common\Responses\ResponseFactory;
 use Mezzio\Helper\UrlHelperInterface;
 use Mezzio\Template\TemplateRendererInterface;
 
@@ -27,9 +28,8 @@ final readonly class CuentasIndiceHandler implements RequestHandlerInterface
      * @param EntityRepository<Cuenta> $repository
      */
     public function __construct(
-        private TemplateRendererInterface $renderer,
-        private UrlHelperInterface $urlHelper,
-        #[Inject(EntityRepository::class . Cuenta::class)]private EntityRepository $repository
+        #[Inject(EntityRepository::class . Cuenta::class)]private EntityRepository $repository,
+        private ResponseFactory $responseFactory
     ) {
     }
 
@@ -45,13 +45,12 @@ final readonly class CuentasIndiceHandler implements RequestHandlerInterface
             );
         }
 
-        return new HtmlResponse($this->renderer->render(
-            'app::cuentas-indice',
+        return $this->responseFactory->createTemplatedHtmlResponse(
+            'cuentas::pages/indice',
             [
-                'urlHelper' => $this->urlHelper,
                 'query' => $query->query,
                 'cuentas' => $cuentas,
-            ] // parameters to pass to template
-        ));
+            ]
+        );
     }
 }

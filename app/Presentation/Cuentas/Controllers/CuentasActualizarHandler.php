@@ -16,6 +16,7 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Laminas\Diactoros\Response\HtmlResponse;
 use Laminas\Diactoros\Response\RedirectResponse;
+use Marta\Presentation\Common\Responses\ResponseFactory;
 use Mezzio\Helper\UrlHelperInterface;
 use Mezzio\Template\TemplateRendererInterface;
 use Nette\Schema\Expect;
@@ -26,8 +27,8 @@ final readonly class CuentasActualizarHandler implements RequestHandlerInterface
      * @psalm-param EntityRepository<Cuenta> $repository
      */
     public function __construct(
-        private UrlHelperInterface $urlHelper,
-        #[Inject(EntityRepository::class . Cuenta::class)]private EntityRepository $repository
+        #[Inject(EntityRepository::class . Cuenta::class)]private EntityRepository $repository,
+        private ResponseFactory $responseFactory
     ) {
     }
 
@@ -40,7 +41,7 @@ final readonly class CuentasActualizarHandler implements RequestHandlerInterface
         $cuenta->setNombre($payload->nombre);
         $this->repository->add($cuenta);
 
-        return new RedirectResponse($this->urlHelper->generate('cuentas.indice'));
+        return $this->responseFactory->createNamedRedirectResponse('cuentas.indice');
     }
 
 }
