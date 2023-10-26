@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use Laminas\Stratigility\Middleware\ErrorHandler;
+use MartaDev\Clockwork\ClockworkMiddleware;
 use Mezzio\Application;
 use Mezzio\Handler\NotFoundHandler;
 use Mezzio\Helper\BodyParams\BodyParamsMiddleware;
@@ -20,7 +21,7 @@ use Psr\Container\ContainerInterface;
  * Setup middleware pipeline:
  */
 
-return function (Application $app, /* MiddlewareFactory $factory, ContainerInterface $container */ ): void {
+return function (Application $app, ContainerInterface $container /* MiddlewareFactory $factory */ ): void {
     // The error handler should be the first (most outer) middleware to catch
     // all Exceptions.
     $app->pipe(ErrorHandler::class);
@@ -43,6 +44,10 @@ return function (Application $app, /* MiddlewareFactory $factory, ContainerInter
     // - $app->pipe('/api', $apiMiddleware);
     // - $app->pipe('/docs', $apiDocMiddleware);
     // - $app->pipe('/files', $filesMiddleware);
+
+    if ($container->get('config')['debug'] ?? false) {
+        $app->pipe(ClockworkMiddleware::class);
+    }
 
     $app->pipe(BodyParamsMiddleware::class);
 

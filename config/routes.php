@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use MartaDev\Clockwork\ClockworkHandler;
+use MartaDev\Clockwork\ClockworkWebAppHandler;
 use Marta\Presentation\Cuentas\Controllers\CuentasCrearHandler;
 use Marta\Presentation\Cuentas\Controllers\CuentasIndiceHandler;
 use Marta\Presentation\Cuentas\Controllers\CuentasNuevoHandler;
@@ -43,7 +45,11 @@ use Marta\Cuentas\WebMarta\GetCuentasViewHandler;
  * );
  */
 
-return static function (Application $app, /* MiddlewareFactory $factory, ContainerInterface $container */): void {
+return static function (Application $app, ContainerInterface $container /* MiddlewareFactory $factory */): void {
+    if ($container->get('config')['debug'] ?? false) {
+        $app->get('/__clockwork/{request:.+}', ClockworkHandler::class, 'clockwork');
+    }
+
     /**
      * Routes follow the RAILS standard for resources
      * https://guides.rubyonrails.org/routing.html#crud-verbs-and-actions

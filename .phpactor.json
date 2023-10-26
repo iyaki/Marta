@@ -1,5 +1,5 @@
 {
-    "$schema": "/root/.vscode-server/data/User/globalStorage/dantleech.vscode-phpactor/phpactor/phpactor.schema.json",
-    "language_server_phpstan.enabled": false,
-    "language_server_psalm.enabled": false
+	"$schema": "/root/.vscode-server/data/User/globalStorage/dantleech.vscode-phpactor/phpactor/phpactor.schema.json",
+	"language_server_phpstan.enabled": false,
+	"language_server_psalm.enabled": false
 }

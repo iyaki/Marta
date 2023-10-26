@@ -21,8 +21,8 @@ require __DIR__ . '/../vendor/autoload.php';
 
     // Execute programmatic/declarative middleware pipeline and routing
     // configuration statements
-    (require __DIR__ . '/../config/pipeline.php')($app, /* $factory, $container */);
-    (require __DIR__ . '/../config/routes.php')($app, /* $factory, $container */);
+    (require __DIR__ . '/../config/pipeline.php')($app, $container/* , $factory */);
+    (require __DIR__ . '/../config/routes.php')($app,  $container/* , $factory */);
 
     $app->run();
 })();

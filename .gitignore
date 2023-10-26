@@ -5,3 +5,4 @@
 /phpunit.xml
 /.psalm_cache
 /vendor/
+/clockwork
