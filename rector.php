@@ -8,15 +8,17 @@ use Rector\Set\ValueObject\LevelSetList;
 use Rector\Set\ValueObject\SetList;
 
 return static function (RectorConfig $rectorConfig): void {
+    $rectorConfig->fileExtensions([
+        'php',
+        'phtml',
+    ]);
+
     $rectorConfig->paths([
         __DIR__ . '/app',
         __DIR__ . '/bin',
         __DIR__ . '/config',
-        __DIR__ . '/database',
-        __DIR__ . '/framework',
+        __DIR__ . '/database/migrations',
         __DIR__ . '/public',
-        __DIR__ . '/templates',
-        __DIR__ . '/test',
     ]);
 
     // register a single rule
