@@ -1,0 +1,21 @@
+parameters:
+	level: 9
+	paths:
+		- app
+		- bin
+		- config
+		- database/migrations
+		- public
+	fileExtensions:
+		- php
+		- phtml
+	doctrine:
+		objectManagerLoader: test/object-manager.php
+	checkGenericClassInNonGenericObjectType: false
+	ignoreErrors:
+		-
+			message: '#Variable \$this might not be defined#'
+			path: *.phtml
+		-
+			message: '#Only booleans are allowed in an if condition, .+ given#'
+			path: *.phtml
