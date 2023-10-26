@@ -4,15 +4,10 @@ declare(strict_types=1);
 
 namespace Marta\Presentation\Common\Responses;
 
-use InvalidArgumentException;
-use Mezzio\Helper\Exception\RuntimeException as ExceptionRuntimeException;
 use Mezzio\Helper\UrlHelperInterface;
 use Mezzio\Template\TemplateRendererInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\UriFactoryInterface;
-use Psr\Http\Message\UriInterface;
-use RuntimeException;
 
 final readonly class ResponseFactory
 {
@@ -33,12 +28,12 @@ final readonly class ResponseFactory
         );
     }
 
-    private function createResponse(int $code = 200, string $reasonPhrase = ''): ResponseInterface
+    private function createResponse(int $code = ResponseCodes::OK->value, string $reasonPhrase = ''): ResponseInterface
     {
         return $this->responseFactory->createResponse($code, $reasonPhrase);
     }
 
-    private function createHtmlResponse(string $html, int $code = 200, string $reasonPhrase = ''): ResponseInterface
+    private function createHtmlResponse(string $html, int $code = ResponseCodes::OK->value, string $reasonPhrase = ''): ResponseInterface
     {
         $response = $this->createResponse($code, $reasonPhrase)
             ->withAddedHeader(self::HEADER_CONTENT_TYPE, self::CONTENT_TYPE_HTML)
@@ -52,7 +47,7 @@ final readonly class ResponseFactory
      * @param non-empty-string $templateName
      * @param array<string, mixed> $params
      */
-    public function createTemplatedHtmlResponse(string $templateName, array $params = [], int $code = 200, string $reasonPhrase = ''): ResponseInterface
+    public function createTemplatedHtmlResponse(string $templateName, array $params = [], int $code = ResponseCodes::OK->value, string $reasonPhrase = ''): ResponseInterface
     {
         return $this->createHtmlResponse(
             $this->renderer->render(
@@ -64,7 +59,7 @@ final readonly class ResponseFactory
         );
     }
 
-    private function createRedirectResponse(string $uri, int $code = 302, string $reasonPhrase = ''): ResponseInterface
+    private function createRedirectResponse(string $uri, int $code = ResponseCodes::FOUND->value, string $reasonPhrase = ''): ResponseInterface
     {
         return $this
             ->createResponse($code, $reasonPhrase)
@@ -82,7 +77,7 @@ final readonly class ResponseFactory
         array $routeParams = [],
         array $queryParams = [],
         ?string $fragmentIdentifier = null,
-        int $code = 302,
+        int $code = ResponseCodes::FOUND->value,
         string $reasonPhrase = ''
     ): ResponseInterface {
         return $this->createRedirectResponse(

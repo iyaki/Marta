@@ -4,7 +4,7 @@ declare(strict_types=1);
 use Mezzio\Helper\UrlHelperInterface;
 use League\Plates\Template\Template;
 
-/** @var ?UrlHelperInterface */
+/** @var ?UrlHelperInterface $urlHelper */
 $urlHelper ??= null;
 \assert($urlHelper instanceof UrlHelperInterface);
 

@@ -15,7 +15,7 @@ use Doctrine\Common\Collections\Selectable;
 interface EntityRepository
 {
     /**
-     * @return ArrayCollection<int<0, max>,T>
+     * @return ArrayCollection<int, T>
      */
     public function all(): ArrayCollection;
 
@@ -31,7 +31,7 @@ interface EntityRepository
     public function get(int $id): object;
 
     /**
-     * @return ArrayCollection<int<0, max>, T>
+     * @return ArrayCollection<int, T>
      */
     public function matching(Criteria $criteria): ArrayCollection;
 

@@ -7,20 +7,17 @@ use Mezzio\Helper\UrlHelperInterface;
 
 \assert($this instanceof Template);
 
-/** @var ?string */
+/** @var ?string $query */
 $query ??= null;
-$query = (string) $query;
+\assert(is_string($query));
 
-/** @var ?UrlHelperInterface */
+/** @var ?UrlHelperInterface $urlHelper */
 $urlHelper ??= null;
 \assert($urlHelper instanceof UrlHelperInterface);
 
-/** @var Cuenta[] */
-$cuentas ??= [];
+/** @var Cuenta[] $cuentas */
 // Verifico que $cuentas este compuesto por elementos de tipo Cuenta
 (fn(Cuenta ...$cuentas): array => $cuentas)(...$cuentas);
-
-echo $cuentas[0]->nombre();
 
 ?>
 <!DOCTYPE html>

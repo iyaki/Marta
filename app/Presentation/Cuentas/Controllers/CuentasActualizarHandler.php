@@ -34,10 +34,11 @@ final readonly class CuentasActualizarHandler implements RequestHandlerInterface
 
     public function handle(ServerRequestInterface $request) : ResponseInterface
     {
-        $id = (int) $request->getAttribute('id');
+        /** @var string $id */
+        $id = $request->getAttribute('id');
         $payload = CuentaPayload::fromRequest($request);
 
-        $cuenta = $this->repository->get($id);
+        $cuenta = $this->repository->get((int) $id);
         $cuenta->setNombre($payload->nombre);
         $this->repository->add($cuenta);
 

@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use DI\Container;
 use DI\ContainerBuilder;
 use Elie\PHPDI\Config\ContainerFactory;
 use Psr\Container\ContainerInterface;

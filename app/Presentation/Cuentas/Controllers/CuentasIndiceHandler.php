@@ -48,7 +48,7 @@ final readonly class CuentasIndiceHandler implements RequestHandlerInterface
         return $this->responseFactory->createTemplatedHtmlResponse(
             'cuentas::pages/indice',
             [
-                'query' => $query->query,
+                'query' => (string) $query->query,
                 'cuentas' => $cuentas,
             ]
         );

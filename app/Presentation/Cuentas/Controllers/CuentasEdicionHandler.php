@@ -31,9 +31,12 @@ final readonly class CuentasEdicionHandler implements RequestHandlerInterface
 
     public function handle(ServerRequestInterface $request) : ResponseInterface
     {
+        /** @var string $id */
+        $id = $request->getAttribute('id');
+
         return $this->responseFactory->createTemplatedHtmlResponse(
             'cuentas::pages/edicion',
-            ['cuenta' => $this->repository->find((int) $request->getAttribute('id'))]
+            ['cuenta' => $this->repository->find((int) $id)]
         );
     }
 
