@@ -47,7 +47,8 @@ use Marta\Cuentas\WebMarta\GetCuentasViewHandler;
 
 return static function (Application $app, ContainerInterface $container /* MiddlewareFactory $factory */): void {
     if ($container->get('config')['debug'] ?? false) {
-        $app->get('/__clockwork/{request:.+}', ClockworkHandler::class, 'clockwork');
+        // $app->get('/__clockwork/{request:.+}', ClockworkHandler::class, 'clockwork');
+        $app->route('/__clockwork/{request:.+}', ClockworkHandler::class, ['GET', 'POST'], 'clockwork');
     }
 
     /**

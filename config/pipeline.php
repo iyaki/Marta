@@ -3,7 +3,8 @@
 declare(strict_types=1);
 
 use Laminas\Stratigility\Middleware\ErrorHandler;
-use MartaDev\Clockwork\ClockworkMiddleware;
+use MartaDev\Clockwork\ClockworkBaseMiddleware;
+use MartaDev\Clockwork\ClockworkMezzioRoutedRequestMiddleware;
 use Mezzio\Application;
 use Mezzio\Handler\NotFoundHandler;
 use Mezzio\Helper\BodyParams\BodyParamsMiddleware;
@@ -22,6 +23,9 @@ use Psr\Container\ContainerInterface;
  */
 
 return function (Application $app, ContainerInterface $container /* MiddlewareFactory $factory */ ): void {
+    if ($container->get('config')['debug'] ?? false) {
+        $app->pipe(ClockworkBaseMiddleware::class);
+    }
     // The error handler should be the first (most outer) middleware to catch
     // all Exceptions.
     $app->pipe(ErrorHandler::class);
@@ -45,10 +49,6 @@ return function (Application $app, ContainerInterface $container /* MiddlewareFa
     // - $app->pipe('/docs', $apiDocMiddleware);
     // - $app->pipe('/files', $filesMiddleware);
 
-    if ($container->get('config')['debug'] ?? false) {
-        $app->pipe(ClockworkMiddleware::class);
-    }
-
     $app->pipe(BodyParamsMiddleware::class);
 
     // Register the routing middleware in the middleware pipeline.
@@ -67,6 +67,10 @@ return function (Application $app, ContainerInterface $container /* MiddlewareFa
 
     // Seed the UrlHelper with the routing results:
     $app->pipe(UrlHelperMiddleware::class);
+
+    if ($container->get('config')['debug'] ?? false) {
+        $app->pipe(ClockworkMezzioRoutedRequestMiddleware::class);
+    }
 
     // Add more middleware here that needs to introspect the routing results; this
     // might include:

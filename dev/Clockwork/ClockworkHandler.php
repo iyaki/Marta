@@ -14,8 +14,16 @@ final class ClockworkHandler implements RequestHandlerInterface
 {
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
+        /** @var Clockwork $clockwork */
         $clockwork = Clockwork::instance();
-        return new JsonResponse($clockwork->getMetadata($request->getAttribute('request')));
+
+        $requestId = $request->getAttribute('request');
+
+        if (\strtoupper($request->getMethod()) === 'POST') {
+            $clockwork->updateMetadata($requestId);
+        }
+
+        return new JsonResponse($clockwork->getMetadata($requestId));
     }
 
 }
