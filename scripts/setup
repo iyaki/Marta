@@ -5,7 +5,14 @@ SCRIPTPATH=$(dirname "$(realpath "$0")")
 cd "${SCRIPTPATH}/../" || exit
 
 composer install
+
 composer mezzio completion bash > /usr/share/bash-completion/completions/mezzio
+
 composer clear-config-cache
+
 composer development-enable
+
 lefthook install
+
+curl -Lo .devcontainer/phpactor.vsix https://github.com/phpactor/vscode-phpactor/releases/latest/download/phpactor.vsix
+# code --install-extension /opt/phpactor.vsix

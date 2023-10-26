@@ -25,7 +25,9 @@
 				"muath-ye.composer-Intelephense",
 				"EditorConfig.EditorConfig",
 				"VisualStudioExptTeam.vscodeintellicode",
-				"bmewburn.vscode-intelephense-client"
+				"redhat.vscode-xml",
+				"xdebug.php-debug",
+				"dantleech.vscode-phpactor"
 			]
 		}
 	},

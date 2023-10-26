@@ -7,6 +7,9 @@ ENV LC_ALL C.UTF-8
 
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
 	&& curl -1sLf 'https://dl.cloudsmith.io/public/evilmartians/lefthook/setup.deb.sh' | sudo -E bash \
+	&& curl -Lo phpactor.phar https://github.com/phpactor/phpactor/releases/latest/download/phpactor.phar \
+	&& chmod a+x phpactor.phar \
+	&& mv phpactor.phar /usr/local/bin/phpactor \
 	&& apt-get update \
 	&& apt-get install \
 		--assume-yes \
@@ -27,6 +30,7 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
 # Install php-pgsql driver
 RUN docker-php-ext-install \
 	mysqli \
+	pcntl \
 	pdo \
 	pdo_mysql \
 	zip
