@@ -26,9 +26,7 @@ final readonly class ClockworkBaseMiddleware implements MiddlewareInterface
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         /** @var Clockwork $clockwork */
-        $clockwork = Clockwork::init([
-            'register_helpers' => true,
-        ]);
+        $clockwork = Clockwork::instance();
         $clockwork->addDataSource(new DoctrineDataSource($this->entityManager));
 
         $response = $handler->handle($request);

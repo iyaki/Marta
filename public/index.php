@@ -16,6 +16,8 @@ require __DIR__ . '/../vendor/autoload.php';
 (function (): void {
     $container = require __DIR__ . '/../config/container.php';
 
+    (require __DIR__ . '/../config/debug.php')($container);
+
     $app = $container->get(\Mezzio\Application::class);
     // $factory = $container->get(\Mezzio\MiddlewareFactory::class);
 
