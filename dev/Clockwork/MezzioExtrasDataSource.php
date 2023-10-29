@@ -28,9 +28,8 @@ final class MezzioExtrasDataSource extends DataSource
         $matchedRoute = $routeResult->getMatchedRoute();
         $middleware = $matchedRoute->getMiddleware();
 
-        if ($middleware instanceof LazyLoadingMiddleware) {
+        if (\property_exists($middleware, 'middlewareName')) {
             $request->controller = $middleware->middlewareName;
-
         }
 
         $routes = $this->app->getRoutes();
