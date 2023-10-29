@@ -1,6 +1,9 @@
 <?php
+
+
 declare(strict_types=1);
 
+use Marta\Presentation\Cuentas\Controllers\CuentasController;
 use Mezzio\Helper\UrlHelperInterface;
 use Marta\Domain\Cuentas\Cuenta;
 use League\Plates\Template\Template;
@@ -36,7 +39,7 @@ $cuenta ??= null;
 		<h1>Editar cuenta</h1>
 	</header>
 	<main>
-		<form method="POST" action="<?= $urlHelper->generate('cuentas.actualizar', ['id' => $cuenta->id()]) ?>">
+		<form method="POST" action="<?= $urlHelper->generate(CuentasController::ACTUALIZAR, ['id' => $cuenta->id()]) ?>">
 			<label>
 				Nombre (*)
 				<input type="text" autocomplete="off" name="nombre" required value="<?= $this->e($cuenta->nombre()) ?>">

@@ -1,8 +1,11 @@
 <?php
+
+
 declare(strict_types=1);
 
 use Marta\Domain\Cuentas\Cuenta;
 use League\Plates\Template\Template;
+use Marta\Presentation\Cuentas\Controllers\CuentasController;
 use Mezzio\Helper\UrlHelperInterface;
 
 \assert($this instanceof Template);
@@ -53,7 +56,7 @@ $urlHelper ??= null;
 				<button type="submit">Restablecer</button>
 			</form>
 		</search>
-		<a href="<?= $urlHelper->generate('cuentas.nuevo') ?>">Crear cuenta</a>
+		<a href="<?= $urlHelper->generate(CuentasController::NUEVO) ?>">Crear cuenta</a>
 		<table>
 			<caption>
 				<h2>Cuentas</h2>
@@ -71,7 +74,7 @@ $urlHelper ??= null;
 					<td><?= $this->e($cuenta->nombre()) ?></td>
 					<td></td>
 					<td>
-						<a href="<?= $urlHelper->generate('cuentas.edicion', ['id' => $cuenta->id()]) ?>">Editar</a>
+						<a href="<?= $urlHelper->generate(CuentasController::EDICION, ['id' => $cuenta->id()]) ?>">Editar</a>
 					</td>
 				</tr>
 				<?php endforeach ?>

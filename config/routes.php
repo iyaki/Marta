@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 use MartaDev\Clockwork\ClockworkHandler;
 use MartaDev\Clockwork\ClockworkWebAppHandler;
+use Marta\Infra\Mezzio\RouterResourceHelper;
+use Marta\Presentation\Cuentas\Controllers\CuentasController;
 use Marta\Presentation\Cuentas\Controllers\CuentasCrearHandler;
 use Marta\Presentation\Cuentas\Controllers\CuentasIndiceHandler;
 use Marta\Presentation\Cuentas\Controllers\CuentasNuevoHandler;
@@ -13,6 +15,8 @@ use Mezzio\Application;
 use Mezzio\MiddlewareFactory;
 use Psr\Container\ContainerInterface;
 use Marta\Cuentas\WebMarta\GetCuentasViewHandler;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
 
 /**
  * FastRoute route configuration
@@ -75,10 +79,18 @@ return static function (Application $app, ContainerInterface $container /* Middl
      * TODO: Crear un Handler para implemntar Controllers que tengan todos los
      * metodos de los endpoints CRUD en una sola clase???
      */
-    $app->get('/cuentas', CuentasIndiceHandler::class, 'cuentas.indice');
-    $app->get('/cuentas/nuevo', CuentasNuevoHandler::class, 'cuentas.nuevo');
-    $app->post('/cuentas', CuentasCrearHandler::class, 'cuentas.crear');
-    $app->get('/cuentas/{id:\d+}/edicion', CuentasEdicionHandler::class, 'cuentas.edicion');
-    // TODO: Convertir este POST en un PUT
-    $app->post('/cuentas/{id:\d+}', CuentasActualizarHandler::class, 'cuentas.actualizar');
+    // $app->get('/cuentas', CuentasIndiceHandler::class, 'cuentas.indice');
+    // $app->get('/cuentas/nuevo', CuentasNuevoHandler::class, 'cuentas.nuevo');
+    // $app->post('/cuentas', CuentasCrearHandler::class, 'cuentas.crear');
+    // $app->get('/cuentas/{id:\d+}/edicion', CuentasEdicionHandler::class, 'cuentas.edicion');
+    // // TODO: Convertir este POST en un PUT
+    // $app->post('/cuentas/{id:\d+}', CuentasActualizarHandler::class, 'cuentas.actualizar');
+
+    // \clock()->addRoute('GET', '/cuentas', CuentasController::class . '::indice', ['name' => 'cuentas.indice']);
+
+    /** @var RouterResourceHelper $resourceHelper */
+    $resourceHelper = $container->get(RouterResourceHelper::class);
+
+    $resourceHelper(CuentasController::class);
+
 };

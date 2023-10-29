@@ -1,6 +1,9 @@
 <?php
+
+
 declare(strict_types=1);
 
+use Marta\Presentation\Cuentas\Controllers\CuentasController;
 use Mezzio\Helper\UrlHelperInterface;
 use League\Plates\Template\Template;
 
@@ -30,7 +33,7 @@ $urlHelper ??= null;
 		<h1>Crear cuenta</h1>
 	</header>
 	<main>
-		<form method="POST" action="<?= $urlHelper->generate('cuentas.crear') ?>">
+		<form method="POST" action="<?= $urlHelper->generate(CuentasController::CREAR) ?>">
 			<label>
 				Nombre (*)
 				<input type="text" autocomplete="off" autofocus name="nombre" required>
