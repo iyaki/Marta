@@ -1,0 +1,18 @@
+<style>
+	@layer reset, watercss, base, layout, page, components, utilities;
+</style>
+<style>
+	@import "<?= $this->asset('/styles/reset.css') ?>" layer(reset);
+</style>
+<style>
+	@import "https://cdn.jsdelivr.net/npm/water.css@2/out/water.css" layer(watercss);
+</style>
+<style>
+	@layer base {
+		:root {
+			font-size: 21px;
+
+			font-family: system-ui, -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, helvetica, Cantarell, Ubuntu, roboto, noto, arial, sans-serif;
+		}
+	}
+</style>

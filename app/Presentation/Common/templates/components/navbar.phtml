@@ -1,0 +1,26 @@
+<?php
+declare(strict_types=1);
+
+use League\Plates\Template\Template;
+use Marta\Presentation\Cuentas\Controllers\CuentasController;
+
+\assert($this instanceof Template);
+?>
+
+<nav>
+	<ul>
+		<style>
+			me .active {
+				font-weight: bold;
+			}
+		</style>
+		<?php $currentUrl = $this->route()->getMatchedRoute()->getPath() ?>
+		<li>
+			<?php $cuentasUrl = $this->url(CuentasController::INDICE); ?>
+			<a
+				class="<?= $currentUrl === $cuentasUrl ? 'active' : '' ?>"
+				href="<?= $cuentasUrl ?>"
+			>Cuentas</a>
+		</li>
+	</ul>
+</nav>

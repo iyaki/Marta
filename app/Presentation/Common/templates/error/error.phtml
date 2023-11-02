@@ -15,7 +15,7 @@ $reason ??= null;
 \assert(is_string($reason));
 
 ?>
-<?php $this->layout('layout::default', ['title' => sprintf('%d %s', $status, $reason)]) ?>
+<?php $this->layout('error::layout', ['title' => sprintf('%d %s', $status, $reason)]) ?>
 
 <h1>Oops!</h1>
 <h2>This is awkward.</h2>

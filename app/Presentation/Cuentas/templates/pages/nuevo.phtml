@@ -4,50 +4,32 @@
 declare(strict_types=1);
 
 use Marta\Presentation\Cuentas\Controllers\CuentasController;
-use Mezzio\Helper\UrlHelperInterface;
 use League\Plates\Template\Template;
 
-/** @var ?UrlHelperInterface $urlHelper */
-$urlHelper ??= null;
-\assert($urlHelper instanceof UrlHelperInterface);
+\assert($this instanceof Template);
 
 ?>
-<!DOCTYPE html>
-<html lang="es">
-<head>
-	<title>Crear Cuenta | Marta</title>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="Sistema de gestión de finanzas hogareñas compartidas">
 
-	<!-- <link href="style.css" rel="stylesheet"> -->
-	<!-- <link rel="icon" type="image/svg+xml" href="/favicon.svg"> -->
-</head>
-<body>
-	<nav>
-		<ul>
-			<li><a href="<?= $urlHelper->generate(CuentasController::INDICE) ?>">Cuentas</a></li>
-		</ul>
-	</nav>
-	<header>
-		<h1>Crear cuenta</h1>
-	</header>
-	<main>
-		<form method="POST" action="<?= $urlHelper->generate(CuentasController::CREAR) ?>">
-			<label>
-				Nombre (*)
-				<input type="text" autocomplete="off" autofocus name="nombre" required>
-			</label>
-			<label>
-				Titulares
-				<select multiple name="titulares">
-					<option>1</option>
-					<option>2</option>
-				</select>
-			</label>
-			<input type="submit">
-		</form>
-	</main>
-	<!-- <script src="script.js"></script> -->
-</body>
-</html>
+<?php $this->layout('layout::default', ['title' => 'Crear Cuenta']) ?>
+
+<?php $this->insert('components::navbar') ?>
+
+<header>
+	<h1>Crear cuenta</h1>
+</header>
+<main>
+	<form method="POST" action="<?= $this->url(CuentasController::CREAR) ?>">
+		<label>
+			Nombre (*)
+			<input type="text" autocomplete="off" autofocus name="nombre" required>
+		</label>
+		<label>
+			Titulares
+			<select multiple name="titulares">
+				<option>1</option>
+				<option>2</option>
+			</select>
+		</label>
+		<input type="submit">
+	</form>
+</main>
