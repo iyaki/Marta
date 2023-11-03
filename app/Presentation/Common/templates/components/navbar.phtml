@@ -10,8 +10,10 @@ use Marta\Presentation\Cuentas\Controllers\CuentasController;
 <nav>
 	<ul>
 		<style>
-			me .active {
-				font-weight: bold;
+			@layer components {
+				this .active {
+					font-weight: bold;
+				}
 			}
 		</style>
 		<?php $currentUrl = $this->route()->getMatchedRoute()->getPath() ?>

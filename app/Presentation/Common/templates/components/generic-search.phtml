@@ -1,0 +1,43 @@
+<?php
+
+declare(strict_types=1);
+
+/** @var ?string $uri */
+$uri ??= null;
+\assert(is_string($uri));
+
+/** @var ?string $query */
+$query ??= null;
+\assert(is_string($query));
+
+/** @var ?string $target */
+$target ??= null;
+\assert(is_string($target));
+?>
+
+<search>
+	<label>
+		Búsqueda
+		<input
+			type="search"
+			autocomplete="on"
+			autofocus
+			name="q"
+			value="<?= $query ?>"
+			placeholder="🔎"
+			hx-get="<?= $uri ?>"
+			hx-trigger="keyup changed delay:500ms, search"
+			hx-target="<?= $target ?>"
+			hx-push-url="true"
+			hx-indicator=".htmx-indicator[name=generic-search]"
+		>
+	</label>
+	<?php $this->insert('components::indicator-spin', ['name' => 'generic-search']) ?>
+	<button
+		hx-on:click="(() => {
+			const searchInput = htmx.find(htmx.closest(this, 'search'), 'input[type=search]')
+			searchInput.value = ''
+			htmx.trigger(searchInput, 'search')
+		})()"
+	>🧹</button>
+</search>

@@ -6,9 +6,6 @@ declare(strict_types=1);
 use Marta\Domain\Cuentas\Cuenta;
 use League\Plates\Template\Template;
 use Marta\Presentation\Cuentas\Controllers\CuentasController;
-use Mezzio\Helper\UrlHelperInterface;
-
-// dd($this);
 
 \assert($this instanceof Template);
 
@@ -29,40 +26,9 @@ $query ??= null;
 	<h1>Gestión de cuentas</h1>
 </header>
 <main>
-	<search>
-		<form action="<?= $this->url(CuentasController::INDICE) ?>">
-			<label>
-				Búsqueda
-				<input type="search" autocomplete="on" autofocus name="q" value="<?= $query ?>">
-			</label>
-			<input type="submit">
-		</form>
-		<form action="<?= $this->url(CuentasController::INDICE) ?>">
-			<button type="submit">🧹</button>
-		</form>
-	</search>
+	<?php $this->insert('components::generic-search', ['uri' => $this->url(CuentasController::INDICE), 'query' => $query, 'target' => '[data-resultados=cuentas]']) ?>
 	<a href="<?= $this->url(CuentasController::NUEVO) ?>">Crear cuenta</a>
-	<table>
-		<caption>
-			<h2>Cuentas</h2>
-		</caption>
-		<thead>
-			<tr>
-				<th scope="col">Nombre</th>
-				<th scope="col">Titulares</th>
-				<th scope="col">Acciones</th>
-			</tr>
-		</thead>
-		<tbody>
-			<?php foreach ($cuentas as $cuenta): ?>
-			<tr>
-				<td><?= $this->e($cuenta->nombre()) ?></td>
-				<td></td>
-				<td>
-					<a href="<?= $this->url(CuentasController::EDICION, ['id' => $cuenta->id()]) ?>">Editar</a>
-				</td>
-			</tr>
-			<?php endforeach ?>
-		</tbody>
-	</table>
+	<section data-resultados="cuentas">
+		<?php $this->insert('cuentas::components/indice-tabla', ['cuentas' => $cuentas]) ?>
+	</section>
 </main>

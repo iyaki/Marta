@@ -33,6 +33,7 @@ final class CuentasController implements ResourceControllerInterface
 
     public function indice(ServerRequestInterface $request): ResponseInterface
     {
+        \clock($request->getHeaders());
         $query = BasicSearchQuery::fromRequest($request);
 
         if ($query->query === null) {
@@ -40,6 +41,17 @@ final class CuentasController implements ResourceControllerInterface
         } else {
             $cuentas = $this->repository->matching(
                 new Criteria(Criteria::expr()->contains('nombre', $query->query))
+            );
+        }
+
+        if (
+            $request->hasHeader('hx-request')
+            && ! $request->hasHeader('hx-history-restore-request')
+            && ! $request->hasHeader('hx-boosted')
+        ) {
+            return $this->responseFactory->createTemplatedHtmlResponse(
+                'cuentas::components/indice-tabla',
+                ['cuentas' => $cuentas]
             );
         }
 

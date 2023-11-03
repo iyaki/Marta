@@ -18,7 +18,11 @@ use League\Plates\Template\Template;
 	<h1>Crear cuenta</h1>
 </header>
 <main>
-	<form method="POST" action="<?= $this->url(CuentasController::CREAR) ?>">
+	<form
+		hx-post="<?= $this->url(CuentasController::CREAR) ?>"
+		hx-indicator=".htmx-indicator[name=cuentas-nuevo]"
+		hx-push-url="true"
+	>
 		<label>
 			Nombre (*)
 			<input type="text" autocomplete="off" autofocus name="nombre" required>
@@ -31,5 +35,6 @@ use League\Plates\Template\Template;
 			</select>
 		</label>
 		<input type="submit">
+		<?php $this->insert('components::indicator-spin', ['name' => 'cuentas-nuevo']) ?>
 	</form>
 </main>

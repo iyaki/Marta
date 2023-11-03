@@ -1,0 +1,27 @@
+<?php
+
+declare(strict_types=1);
+
+/** @var ?string $name */
+$name ??= 'htmx-indicator';
+\assert(is_string($name));
+?>
+
+<span>
+	<style>
+		this p {
+			display: inline-block;
+			font-size: 3em;
+			animation-name: spin;
+			animation-duration: 4000ms;
+			animation-iteration-count: infinite;
+			animation-timing-function: linear;
+		}
+
+		@keyframes spin {
+			from {transform:rotate(0deg);}
+			to {transform:rotate(360deg);}
+		}
+	</style>
+	<p class="htmx-indicator" name="<?= $name ?>">⚇</p>
+</span>

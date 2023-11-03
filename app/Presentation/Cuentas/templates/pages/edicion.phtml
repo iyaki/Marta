@@ -24,7 +24,11 @@ $cuenta ??= null;
 	<h1>Editar cuenta</h1>
 </header>
 <main>
-	<form method="POST" action="<?= $this->url(CuentasController::ACTUALIZAR, ['id' => $cuenta->id()]) ?>">
+	<form
+		hx-put="<?= $this->url(CuentasController::ACTUALIZAR, ['id' => $cuenta->id()]) ?>"
+		hx-indicator=".htmx-indicator[name=cuentas-edicion]"
+		hx-push-url="true"
+	>
 		<label>
 			Nombre (*)
 			<input type="text" autocomplete="off" name="nombre" required value="<?= $this->e($cuenta->nombre()) ?>">
@@ -37,6 +41,7 @@ $cuenta ??= null;
 			</select>
 		</label>
 		<input type="submit">
+		<?php $this->insert('components::indicator-spin', ['name' => 'cuentas-edicion']) ?>
 	</form>
 	<form>
 		<button type="submit">Eliminar</button>

@@ -1,0 +1,41 @@
+<?php
+
+
+
+declare(strict_types=1);
+
+use League\Plates\Template\Template;
+use Marta\Domain\Cuentas\Cuenta;
+use Marta\Presentation\Cuentas\Controllers\CuentasController;
+
+\assert($this instanceof Template);
+
+/** @var Cuenta[] $cuentas */
+// Verifico que $cuentas este compuesto por elementos de tipo Cuenta
+(fn(Cuenta ...$cuentas): array => $cuentas)(...$cuentas);
+
+?>
+
+<table>
+	<caption>
+		<h2>Cuentas</h2>
+	</caption>
+	<thead>
+		<tr>
+			<th scope="col">Nombre</th>
+			<th scope="col">Titulares</th>
+			<th scope="col">Acciones</th>
+		</tr>
+	</thead>
+	<tbody>
+		<?php foreach ($cuentas as $cuenta): ?>
+		<tr>
+			<td><?= $this->e($cuenta->nombre()) ?></td>
+			<td></td>
+			<td>
+				<a href="<?= $this->url(CuentasController::EDICION, ['id' => $cuenta->id()]) ?>">Editar</a>
+			</td>
+		</tr>
+		<?php endforeach ?>
+	</tbody>
+</table>

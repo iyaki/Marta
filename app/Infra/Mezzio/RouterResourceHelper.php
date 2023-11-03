@@ -40,7 +40,7 @@ final readonly class RouterResourceHelper
             $controllerName::EDICION
         );
         // TODO: Convertir este POST en un PUT
-        $this->app->post(
+        $this->app->put(
             $controllerName::ROUTE_BASE . '/{id:\d+}',
             $this->controllerHelper->create($controllerName, ResourceControllerInterface::ACTUALIZAR),
             $controllerName::ACTUALIZAR
